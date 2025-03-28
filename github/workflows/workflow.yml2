@@ -1,0 +1,20 @@
+name: API-Test
+
+on: [push]
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js installieren
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: API-Request mit Secret-Key
+        run: |
+          echo "Starte API-Test..."
+          curl -H "Authorization: Bearer ${{ secrets.API_KEY }}" https://api.example.com/test
